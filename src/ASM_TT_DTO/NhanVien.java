@@ -25,11 +25,12 @@ public class NhanVien {
     Date NgayVaoLam;
     String TenDangNhap;
     String MatKhau;
+    String HinhAnh;
 
     public NhanVien() {
     }
 
-    public NhanVien(String MaNV, String TenNV, boolean GioiTinh, Date NgaySinh, String ChucVu, double Luong, String DiaChi, String SDT, String CMND, Date NgayVaoLam, String TenDangNhap, String MatKhau) {
+    public NhanVien(String MaNV, String TenNV, boolean GioiTinh, Date NgaySinh, String ChucVu, double Luong, String DiaChi, String SDT, String CMND, Date NgayVaoLam, String TenDangNhap, String MatKhau, String HinhAnh) {
         this.MaNV = MaNV;
         this.TenNV = TenNV;
         this.GioiTinh = GioiTinh;
@@ -42,9 +43,10 @@ public class NhanVien {
         this.NgayVaoLam = NgayVaoLam;
         this.TenDangNhap = TenDangNhap;
         this.MatKhau = MatKhau;
+        this.HinhAnh = HinhAnh;
     }
 
-    public NhanVien(String TenNV, boolean GioiTinh, Date NgaySinh, String ChucVu, double Luong, String DiaChi, String SDT, String CMND, Date NgayVaoLam, String TenDangNhap, String MatKhau) {
+    public NhanVien(String TenNV, boolean GioiTinh, Date NgaySinh, String ChucVu, double Luong, String DiaChi, String SDT, String CMND, Date NgayVaoLam, String TenDangNhap, String MatKhau, String HinhAnh) {
         this.TenNV = TenNV;
         this.GioiTinh = GioiTinh;
         this.NgaySinh = NgaySinh;
@@ -56,7 +58,20 @@ public class NhanVien {
         this.NgayVaoLam = NgayVaoLam;
         this.TenDangNhap = TenDangNhap;
         this.MatKhau = MatKhau;
+        this.HinhAnh = HinhAnh;
     }
+
+    
+    
+    public String getHinhAnh() {
+        return HinhAnh;
+    }
+
+    public void setHinhAnh(String HinhAnh) {
+        this.HinhAnh = HinhAnh;
+    }
+
+    
     
     
 

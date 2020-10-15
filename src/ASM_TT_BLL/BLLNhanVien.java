@@ -49,7 +49,7 @@ public class BLLNhanVien {
         tbModel.setRowCount(0); // sét số dòng trong bảng về 0
         // Lấy dự liệu danh sách nhân viên từ DAL
         ResultSet rs = DALNhanVien.getALLNhanVien();
-        Object obj[] = new Object[13];
+        Object obj[] = new Object[14];
         try {
             while (rs.next()) {
                 obj[0] = tbModel.getRowCount() + 1;
@@ -71,6 +71,7 @@ public class BLLNhanVien {
                 obj[10] = rs.getString("TenDangNhap");
                 obj[11] = rs.getString("MatKhau");
                 obj[12] = rs.getDate("NgayVaoLam");
+                obj[13] = rs.getString("HinhAnh");
                 // Thêm obj vào table 
                 tbModel.addRow(obj);
 
@@ -98,6 +99,8 @@ public class BLLNhanVien {
                 nv.setTenDangNhap(rs.getString("TenDangNhap"));
                 nv.setMatKhau(rs.getString("MatKhau"));
                 nv.setNgayVaoLam(rs.getDate("NgayVaoLam"));
+                nv.getHinhAnh();
+                
                 // Trả về nhân viên 
                 return nv;
 

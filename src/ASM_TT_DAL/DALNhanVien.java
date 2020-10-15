@@ -49,8 +49,8 @@ public class DALNhanVien {
 
     public static void ThemNhanVien(NhanVien nv) {
         String sql = " SET DATEFORMAT DMY INSERT INTO [dbo].[NhanVien] "
-                + "([TenNV], [GioiTinh], [NgaySinh], [ChucVu], [Luong], [SoDienThoai], [DiaChi], [CMND], [TenDangNhap], [MatKhau], [NgayVaoLam]) "
-                + "     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+                + "([TenNV], [GioiTinh], [NgaySinh], [ChucVu], [Luong], [SoDienThoai], [DiaChi], [CMND], [TenDangNhap], [MatKhau], [NgayVaoLam], [HinhAnh] ) "
+                + "     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 
         SQLHalper.executeUpdate(sql,
                 nv.getTenNV(),
@@ -63,7 +63,8 @@ public class DALNhanVien {
                 nv.getCMND(),
                 nv.getTenDangNhap(),
                 nv.getMatKhau(),
-                ChuyenDoi.LayNgayString(nv.getNgayVaoLam()));
+                ChuyenDoi.LayNgayString(nv.getNgayVaoLam()),
+                nv.getHinhAnh());
     }
 
     public static void UpdateNhanVien(NhanVien nv) {
@@ -79,6 +80,7 @@ public class DALNhanVien {
                 + "      ,[TenDangNhap] = ? "
                 + "      ,[MatKhau] = ? "
                 + "      ,[NgayVaoLam] = ? "
+                + "      ,[HinhAnh] = ? "
                 + " WHERE MaNV = ? ";
         SQLHalper.executeUpdate(sql,
                 nv.getTenNV(),
@@ -92,6 +94,7 @@ public class DALNhanVien {
                 nv.getTenDangNhap(),
                 nv.getMatKhau(),
                 ChuyenDoi.LayNgayString(nv.getNgayVaoLam()),
+                nv.getHinhAnh(),
                 nv.getMaNV());
     }
 

@@ -17,15 +17,13 @@ import java.util.logging.Logger;
  * @author LENOVO
  */
 public class ChuyenDoi {
+     
      // chuyển đổi ngày tháng date <--> String
     // Tạo đinh dạng ngày tháng 
-
     static DateFormat dateFomat = new SimpleDateFormat("dd-MM-yyyy");
-    
     // Hàm chuyển Date sang String
     public static String LayNgayString(Date date) {
         return dateFomat.format(date);
-        
     }
     // Hmaf chuyển String sang date 
     public static Date LayNgayDate(String Ngay){

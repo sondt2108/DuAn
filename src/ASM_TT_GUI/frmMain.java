@@ -153,7 +153,7 @@ public class frmMain extends javax.swing.JFrame {
 
         btnHD.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ASM_TT_IMAGES/hoadon.png"))); // NOI18N
-        btnHD.setText("Hoá Đơn");
+        btnHD.setText("Chi tiết hóa đơn");
         btnHD.setFocusable(false);
         btnHD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnHD.setOpaque(false);
@@ -166,7 +166,7 @@ public class frmMain extends javax.swing.JFrame {
 
         btnCTHD.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCTHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ASM_TT_IMAGES/cthd.png"))); // NOI18N
-        btnCTHD.setText("Chi Tiết Hoá Đơn");
+        btnCTHD.setText("Tạo hóa đơn");
         btnCTHD.setFocusable(false);
         btnCTHD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnCTHD.setOpaque(false);
@@ -259,11 +259,11 @@ public class frmMain extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
 
         tabChuongTrinh.addTab("Giới Thiệu", jPanel1);
@@ -317,11 +317,11 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1007, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(1007, 821));
