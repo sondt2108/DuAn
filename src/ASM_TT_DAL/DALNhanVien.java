@@ -65,6 +65,7 @@ public class DALNhanVien {
                 nv.getMatKhau(),
                 ChuyenDoi.LayNgayString(nv.getNgayVaoLam()),
                 nv.getHinhAnh());
+                //push
     }
 
     public static void UpdateNhanVien(NhanVien nv) {
