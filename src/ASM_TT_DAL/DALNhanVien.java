@@ -116,6 +116,7 @@ public class DALNhanVien {
     public static void DeleteNhanVien(String MaNV) {
         String sql = " DELETE FROM NHANVIEN WHERE MaNV = ?";
         SQLHalper.executeUpdate(sql, MaNV);
+        //push
     }
 
     public static ResultSet TimKiem(String TenNhanVien, String ChucVu){

@@ -635,6 +635,7 @@ public class TabSanPham extends javax.swing.JPanel {
         img.setImageLabel(lblHinhAnh, "image//" + image);
         //Chuyển tab về đầu tiên
         lblHinhAnh.setText("");
+        /// NÁBX
 
 
     }//GEN-LAST:event_tblDanhSachMouseClicked
