@@ -13,9 +13,11 @@ import ASM_TT_DAL.DALSanPham;
 import ASM_TT_DTO.NhanVien;
 import ASM_TT_DTO.SanPham;
 import ASM_TT_HALPER.ChuyenDoi;
+import ASM_TT_HALPER.Mycombobox;
 import ASM_TT_HALPER.SQLHalper;
 import java.sql.ResultSet;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author LENOVO
  */
-public class BLLDangNhap {
+public class BllSanPham {
 
     public static boolean KtraThongTin(String TenDangNhap, String MatKhau) {
         if (TenDangNhap.isEmpty() || MatKhau.isEmpty()) {
@@ -67,18 +69,22 @@ public class BLLDangNhap {
         tbModel.setRowCount(0); // sét số dòng trong bảng về 0
         // Lấy dự liệu danh sách nhân viên từ DAL
         ResultSet rs = DALSanPham.getALLSanPham();
-        Object obj[] = new Object[8];
+        Object obj[] = new Object[12];
         try {
             while (rs.next()) {
 
                 obj[0] = tbModel.getRowCount() + 1;
-                obj[1] = rs.getString("MaSanPham");
-                obj[2] = rs.getString("TenSanPham");
+                obj[1] = rs.getInt("MaSP");
+                obj[2] = rs.getString("TenSP");
                 obj[3] = rs.getInt("SoLuong");
                 obj[4] = rs.getString("DonViTinh");
-                obj[5] = ChuyenDoi.LayNgayString(rs.getDate("NgayNhap"));
-                obj[6] = rs.getString("HangSX");
-                obj[7] = ChuyenDoi.LaySoDouble(rs.getString("Gia"));
+                obj[5] = ChuyenDoi.LaySoString(rs.getDouble("GiaNhap"));
+                obj[6] = ChuyenDoi.LaySoString(rs.getDouble("GiaBan"));
+                obj[7] = rs.getInt("MaLoaiSP");
+                obj[8] = rs.getInt("MaHangSX");
+                obj[9] = ChuyenDoi.LayNgayString(rs.getDate("NgayNhap"));
+                obj[10] = rs.getString("MoTa");
+                obj[11] = rs.getString("HinhAnh");
                 // Thêm obj vào table 
                 tbModel.addRow(obj);
 
@@ -94,21 +100,37 @@ public class BLLDangNhap {
             if (rs.next()) {
                 // Nếu Có Nhân Viên 
                 SanPham sp = new SanPham();
-                sp.setMaSanPham(rs.getString("MaSanPham"));
-                sp.setTenSanPham(rs.getString("TenSanPham"));
+                sp.setMaSanPham(rs.getString("MaSP"));
+                sp.setTenSanPham(rs.getString("TenSP"));
                 sp.setSoLuong(rs.getInt("SoLuong"));
                 sp.setDonViTinh(rs.getString("DonViTinh"));
-                sp.setNhayNhap(rs.getDate("NgayNhap"));
-                sp.setHangSanXuat(rs.getString("HangSX"));
-                sp.setGia(rs.getDouble("Gia"));
+                sp.setGiaNhap(rs.getDouble("GiaNhap"));
+                sp.setGiaBan(rs.getDouble("GiaBan"));
+                sp.setMaLoaiSp(rs.getString("MaLoaiSP"));
+                sp.setMaHangSx(rs.getString("MaHangSX"));
+                sp.setMoTa(rs.getString("MoTa"));
+                sp.setNgayNhap(rs.getDate("NgayNhap"));
+                sp.setHinhAnh(rs.getString("HinhAnh"));
                 // Trả về nhân viên 
                 return sp;
 
             }
         } catch (SQLException e) {
-            ThongBao.ThongBaoDangNhap("Thông Báo", "Lỗi Lấy Nhân Viên Theo Mã");
+            ThongBao.ThongBaoDangNhap("Thông Báo", "Lỗi Lấy Sản Phẩm Theo Mã");
         }
         return null;
+    }
+    
+    private String LayTenLoaiSP(String MaLoaiSP) {
+        ResultSet rs = DALSanPham.GetTenLoaiSP(MaLoaiSP);
+        try {
+            if(rs.next()) {
+                return rs.getString("MaLoaiSP");
+            }
+        } catch (SQLException ex) {
+            ThongBao.ThongBaoSQL("Thông báo", "Lỗi lấy tên loại sản phẩm");
+        }
+        return "";
     }
 
     public static boolean KiemTraSanPham(SanPham sp) {
@@ -121,9 +143,6 @@ public class BLLDangNhap {
     }
 
     public static void UpdateSanPham(SanPham sp) {
-        if (!KiemTraSanPham(sp)) {
-            return;
-        }
         DALSanPham.UpdateSanPham(sp);
     }
 // hàm xoá nhiều nhân viên theo mã
@@ -134,13 +153,13 @@ public class BLLDangNhap {
         String danhSachDaXoa = "";
 
         for (String MaSP : lstMaSP) {
-
-            if (DALSanPham.kiemtraCoTheXoa(MaSP)) {
+            DALSanPham.DeleteSanPham(MaSP);
+            /*if (DALSanPham.kiemtraCoTheXoa(MaSP)) {
                 DALSanPham.DeleteSanPham(MaSP);
                 danhSachDaXoa += MaSP + " \n";
             } else {
                 danhSachKhongTheXoa += MaSP + " \n";
-            }
+            }*/
         }
 
         if (!danhSachDaXoa.equals("")) {
@@ -152,22 +171,27 @@ public class BLLDangNhap {
 
     }
 
-    public static void TimSanPham(JTable tblDanhSach, String TenSanPham, String HangSX) {
+    public static void TimSanPham(JTable tblDanhSach, String TuKhoa, String LoaiSp) {
         DefaultTableModel tbModel = (DefaultTableModel) tblDanhSach.getModel();
         tbModel.setRowCount(0); // sét số dòng trong bảng về 0
         // Lấy dự liệu danh sách nhân viên từ DAL
-        ResultSet rs = DALSanPham.TimKiem(TenSanPham, HangSX);
-        Object obj[] = new Object[7];
+        ResultSet rs = DALSanPham.TimKiem(TuKhoa, LoaiSp);
+        Object obj[] = new Object[12];
         try {
             while (rs.next()) {
 
                 obj[0] = tbModel.getRowCount() + 1;
-                obj[1] = rs.getString("MaSanPham");
-                obj[2] = rs.getString("TenSanPham");
-                obj[3] = rs.getString("DonViTinh");
-                obj[4] = ChuyenDoi.LayNgayString(rs.getDate("NgayNhap"));
-                obj[5] = rs.getString("HangSX");
-                obj[6] = ChuyenDoi.LaySoDouble(rs.getString("Gia"));
+                obj[1] = rs.getInt("MaSP");
+                obj[2] = rs.getString("TenSP");
+                obj[3] = rs.getInt("SoLuong");
+                obj[4] = rs.getString("DonViTinh");
+                obj[5] = ChuyenDoi.LaySoString(rs.getDouble("GiaNhap"));
+                obj[6] = ChuyenDoi.LaySoString(rs.getDouble("GiaBan"));
+                obj[7] = rs.getInt("MaLoaiSP");
+                obj[8] = rs.getInt("MaHangSX");
+                obj[9] = ChuyenDoi.LayNgayString(rs.getDate("NgayNhap"));
+                obj[10] = rs.getString("MoTa");
+                obj[11] = rs.getString("HinhAnh");
                 // Thêm obj vào table 
                 tbModel.addRow(obj);
 
@@ -178,7 +202,7 @@ public class BLLDangNhap {
 
     }
 
-    public static SanPham GetSanPham(String MaSP) {
+    /*public static SanPham GetSanPham(String MaSP) {
         SanPham sp = new SanPham();
         ResultSet rs = DALSanPham.Getone(MaSP);
 
@@ -200,7 +224,7 @@ public class BLLDangNhap {
             ThongBao.ThongBaoDangNhap("Thông Báo", "Lỗi Lấy Sản Phẩm!!!" + e.getMessage());
         }
         return null;
-    }
+    }*/
 
     public static void LoadSanPhamHoaDon(JTable tblDanhSach) {
         DefaultTableModel tbModel = (DefaultTableModel) tblDanhSach.getModel();
@@ -225,7 +249,7 @@ public class BLLDangNhap {
         }
     }
 
-    public static void TimSanPhamHoaDon(JTable tblDanhSach, String TuKhoa, String HangSX) {
+    /*public static void TimSanPhamHoaDon(JTable tblDanhSach, String TuKhoa, String HangSX) {
         DefaultTableModel tbModel = (DefaultTableModel) tblDanhSach.getModel();
         tbModel.setRowCount(0); // sét số dòng trong bảng về 0
         // Lấy dự liệu danh sách nhân viên từ DAL
@@ -246,7 +270,7 @@ public class BLLDangNhap {
         } catch (SQLException e) {
             ThongBao.ThongBaoDangNhap("Thông Báo Lỗi", "Lỗi Lấy Danh Sách Sản Phẩm");
         }
-    }
+    }*/
 
     /*public static NhanVien LayNhanVienTheoTen(String TenDangNhap) {
         ResultSet rs = DALNhanVien.getNhanVien(TenDangNhap);

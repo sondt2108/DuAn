@@ -1,7 +1,7 @@
 package ASM_TT_GUI;
 
 import ASM_TT_BLL.BLLCombobox;
-import ASM_TT_BLL.BLLDangNhap;
+import ASM_TT_BLL.BllSanPham;
 import ASM_TT_BLL.BLLNhanVien;
 import ASM_TT_DAL.DALNhanVien;
 import ASM_TT_DTO.NhanVien;
@@ -152,8 +152,8 @@ public class TabNhanVien extends javax.swing.JPanel {
         btnNhapMoi = new keeptoo.KButton();
         btnChonHinh = new javax.swing.JButton();
         lblHinhAnh = new javax.swing.JLabel();
-        txtTimKiem = new javax.swing.JTextField();
         TimKiem = new javax.swing.JButton();
+        txtTimKiem = new javax.swing.JTextField();
         lblDiaChi1 = new javax.swing.JLabel();
         txtThongBao = new javax.swing.JTextField();
         txtMatKhau = new javax.swing.JTextField();
@@ -387,15 +387,6 @@ public class TabNhanVien extends javax.swing.JPanel {
         lblHinhAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHinhAnh.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 0, 204)));
 
-        txtTimKiem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtTimKiem.setForeground(new java.awt.Color(0, 0, 153));
-        txtTimKiem.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
-        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTimKiemKeyReleased(evt);
-            }
-        });
-
         TimKiem.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ASM_TT_IMAGES/search.png"))); // NOI18N
         TimKiem.setText(" Search");
@@ -403,6 +394,15 @@ public class TabNhanVien extends javax.swing.JPanel {
         TimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TimKiemActionPerformed(evt);
+            }
+        });
+
+        txtTimKiem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTimKiem.setForeground(new java.awt.Color(0, 0, 153));
+        txtTimKiem.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
+        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTimKiemKeyReleased(evt);
             }
         });
 
@@ -454,8 +454,6 @@ public class TabNhanVien extends javax.swing.JPanel {
             tblDanhSach.getColumnModel().getColumn(10).setMaxWidth(0);
             tblDanhSach.getColumnModel().getColumn(11).setMinWidth(0);
             tblDanhSach.getColumnModel().getColumn(11).setMaxWidth(0);
-            tblDanhSach.getColumnModel().getColumn(13).setMinWidth(0);
-            tblDanhSach.getColumnModel().getColumn(13).setMaxWidth(0);
         }
 
         txtHinhAnh.setEditable(false);
@@ -472,10 +470,10 @@ public class TabNhanVien extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -541,8 +539,8 @@ public class TabNhanVien extends javax.swing.JPanel {
                                         .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbbTimCV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(28, 28, 28)
+                                .addComponent(cbbTimCV, 0, 90, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -556,6 +554,7 @@ public class TabNhanVien extends javax.swing.JPanel {
                                 .addContainerGap())))
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(txtThongBao, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -652,7 +651,7 @@ public class TabNhanVien extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1093, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1093, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

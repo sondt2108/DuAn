@@ -17,21 +17,44 @@ public class SanPham {
     String TenSanPham;
     int SoLuong;
     String DonViTinh;
-    Date NhayNhap;
-    String HangSanXuat;
-    double Gia;
+    double GiaNhap;
+    double GiaBan;
+    String MaLoaiSp;
+    String MaHangSx;
+    Date NgayNhap;
+    String MoTa;
+    String HinhAnh;
 
-    public SanPham() {
-    }
-
-    public SanPham(String MaSanPham, String TenSanPham, int SoLuong, String DonViTinh, Date NhayNhap, String HangSanXuat, double Gia) {
+    public SanPham(String MaSanPham, String TenSanPham, int SoLuong, String DonViTinh, double GiaNhap, double GiaBan, String MaLoaiSp, String MaHangSx, Date NgayNhap, String MoTa, String HinhAnh) {
         this.MaSanPham = MaSanPham;
         this.TenSanPham = TenSanPham;
         this.SoLuong = SoLuong;
         this.DonViTinh = DonViTinh;
-        this.NhayNhap = NhayNhap;
-        this.HangSanXuat = HangSanXuat;
-        this.Gia = Gia;
+        this.GiaNhap = GiaNhap;
+        this.GiaBan = GiaBan;
+        this.MaLoaiSp = MaLoaiSp;
+        this.MaHangSx = MaHangSx;
+        this.NgayNhap = NgayNhap;
+        this.MoTa = MoTa;
+        this.HinhAnh = HinhAnh;
+    }
+
+    public SanPham(String TenSanPham, int SoLuong, String DonViTinh, double GiaNhap, double GiaBan, String MaLoaiSp, String MaHangSx, Date NgayNhap, String MoTa, String HinhAnh) {
+        this.TenSanPham = TenSanPham;
+        this.SoLuong = SoLuong;
+        this.DonViTinh = DonViTinh;
+        this.GiaNhap = GiaNhap;
+        this.GiaBan = GiaBan;
+        this.MaLoaiSp = MaLoaiSp;
+        this.MaHangSx = MaHangSx;
+        this.NgayNhap = NgayNhap;
+        this.MoTa = MoTa;
+        this.HinhAnh = HinhAnh;
+    }
+    
+
+    public SanPham() {
+    
     }
 
     public String getMaSanPham() {
@@ -66,30 +89,62 @@ public class SanPham {
         this.DonViTinh = DonViTinh;
     }
 
-    public Date getNhayNhap() {
-        return NhayNhap;
+    public double getGiaNhap() {
+        return GiaNhap;
     }
 
-    public void setNhayNhap(Date NhayNhap) {
-        this.NhayNhap = NhayNhap;
+    public void setGiaNhap(double GiaNhap) {
+        this.GiaNhap = GiaNhap;
     }
 
-    public String getHangSanXuat() {
-        return HangSanXuat;
+    public double getGiaBan() {
+        return GiaBan;
     }
 
-    public void setHangSanXuat(String HangSanXuat) {
-        this.HangSanXuat = HangSanXuat;
+    public void setGiaBan(double GiaBan) {
+        this.GiaBan = GiaBan;
     }
 
-    public double getGia() {
-        return Gia;
+    public String getMaLoaiSp() {
+        return MaLoaiSp;
     }
 
-    public void setGia(double Gia) {
-        this.Gia = Gia;
+    public void setMaLoaiSp(String MaLoaiSp) {
+        this.MaLoaiSp = MaLoaiSp;
     }
 
- 
+    public String getMaHangSx() {
+        return MaHangSx;
+    }
+
+    public void setMaHangSx(String MaHangSx) {
+        this.MaHangSx = MaHangSx;
+    }
+
+    public Date getNgayNhap() {
+        return NgayNhap;
+    }
+
+    public void setNgayNhap(Date NgayNhap) {
+        this.NgayNhap = NgayNhap;
+    }
+
+    public String getMoTa() {
+        return MoTa;
+    }
+
+    public void setMoTa(String MoTa) {
+        this.MoTa = MoTa;
+    }
+
+    public String getHinhAnh() {
+        return HinhAnh;
+    }
+
+    public void setHinhAnh(String HinhAnh) {
+        this.HinhAnh = HinhAnh;
+    }
+
+    
     
 }

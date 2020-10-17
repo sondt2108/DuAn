@@ -5,7 +5,7 @@
  */
 package ASM_TT_BLL;
 
-import static ASM_TT_BLL.BLLDangNhap.KiemTraSanPham;
+import static ASM_TT_BLL.BllSanPham.KiemTraSanPham;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import ASM_TT_HALPER.ThongBao;
@@ -108,8 +108,8 @@ public class BLLHoaDon {
         obj[1] = sp.getMaSanPham();
         obj[2] = sp.getTenSanPham();
         obj[3] = SoLuongMua;
-        obj[4] = ChuyenDoi.LaySoString(sp.getGia());
-        obj[5] = ChuyenDoi.LaySoString(Double.parseDouble(SoLuongMua) * sp.getGia());
+//        obj[4] = ChuyenDoi.LaySoString(sp.getGia());
+        //obj[5] = ChuyenDoi.LaySoString(Double.parseDouble(SoLuongMua) * sp.getGia());
         obj[6] = GhiChu;
 
         tbModel.addRow(obj);

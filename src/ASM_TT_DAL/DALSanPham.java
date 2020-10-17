@@ -7,6 +7,7 @@ package ASM_TT_DAL;
 
 import ASM_TT_DTO.SanPham;
 import ASM_TT_HALPER.ChuyenDoi;
+import ASM_TT_HALPER.Mycombobox;
 import java.sql.*;
 import javax.swing.*;
 import java.util.Date.*;
@@ -26,40 +27,65 @@ public class DALSanPham {
         return SQLHalper.executeQuery(sql);
     }
 
-    public static ResultSet getSanPham(String MaNV) {
-        String sql = "SELECT * FROM SanPham WHERE MaSanPham = ?";
-        return SQLHalper.executeQuery(sql, MaNV);
+    public static ResultSet getSanPham(String MaSP) {
+        String sql = "SELECT * FROM SanPham WHERE MaSP = ?";
+        return SQLHalper.executeQuery(sql, MaSP);
+    }
+
+    public static ResultSet GetTenLoaiSP(String MaLoaiSP) {
+        String sql = "SELECT * FROM LoaiSP WHERE MaLoaiSP = ?";
+        return SQLHalper.executeQuery(sql, MaLoaiSP);
     }
 
     public static void ThemSanPham(SanPham sp) {
-        String sql = " SET DATEFORMAT DMY INSERT INTO [dbo].[SanPham]([MaSanPham],[TenSanPham],[SoLuong] "
-                + "           ,[DonViTinh],[NgayNhap],[HangSX],[Gia]) "
-                + "     VALUES(?,?,?,?,?,?,?) ";
+        String sql = "SET DATEFORMAT DMY INSERT INTO [dbo].[SanPham] "
+                + "           ([TenSP],[SoLuong],[DonViTinh],[GiaNhap] "
+                + "		   ,[GiaBan],[MaLoaiSP],[MaHangSX],[MoTa] "
+                + "		   ,[NgayNhap],[HinhAnh]) "
+                + "     VALUES "
+                + "           (?,?,?,?,?,?,?,?,?,?)";
 
         SQLHalper.executeUpdate(sql,
-                sp.getMaSanPham(),
                 sp.getTenSanPham(),
                 sp.getSoLuong(),
                 sp.getDonViTinh(),
-                ChuyenDoi.LayNgayString(sp.getNhayNhap()),
-                sp.getHangSanXuat(),
-                sp.getGia());
+                ChuyenDoi.LaySoString(sp.getGiaNhap()),
+                ChuyenDoi.LaySoString(sp.getGiaBan()),
+                sp.getMaLoaiSp(),
+                sp.getMaHangSx(),
+                sp.getMoTa(),
+                ChuyenDoi.LayNgayString(sp.getNgayNhap()),
+                sp.getHinhAnh()
+        );
 
     }
 
     public static void UpdateSanPham(SanPham sp) {
-        String sql = " SET DATEFORMAT DMY UPDATE [dbo].[SanPham] "
-                + "   SET [TenSanPham] = ? ,[SoLuong] = ? ,[DonViTinh] = ? "
-                + "      ,[NgayNhap] = ? ,[HangSX] = ? ,[Gia] = ? "
-                + " WHERE [MaSanPham] = ? ";
+        String sql = "SET DATEFORMAT DMY UPDATE [dbo].[SanPham]"
+                + "   SET [TenSP] = ? "
+                + "      ,[SoLuong] = ? "
+                + "      ,[DonViTinh] = ? "
+                + "      ,[GiaNhap] = ? "
+                + "      ,[GiaBan] = ? "
+                + "      ,[MaLoaiSP] = ? "
+                + "      ,[MaHangSX] = ? "
+                + "      ,[MoTa] = ? "
+                + "      ,[NgayNhap] = ? "
+                + "      ,[HinhAnh] = ? "
+                + " WHERE MaSP = ? ";
         SQLHalper.executeUpdate(sql,
                 sp.getTenSanPham(),
                 sp.getSoLuong(),
                 sp.getDonViTinh(),
-                ChuyenDoi.LayNgayString(sp.getNhayNhap()),
-                sp.getHangSanXuat(),
-                ChuyenDoi.LaySoString(sp.getGia()),
+                ChuyenDoi.LaySoString(sp.getGiaNhap()),
+                ChuyenDoi.LaySoString(sp.getGiaBan()),
+                sp.getMaLoaiSp(),
+                sp.getMaHangSx(),
+                sp.getMoTa(),
+                ChuyenDoi.LayNgayString(sp.getNgayNhap()),
+                sp.getHinhAnh(),
                 sp.getMaSanPham());
+                
     }
     // Hàm xoá sp SQL
 
@@ -78,13 +104,13 @@ public class DALSanPham {
 
     public static void DeleteSanPham(String MaSP) {
 
-        String sql = " DELETE FROM SANPHAM WHERE MASANPHAM = ?";
+        String sql = " DELETE FROM SANPHAM WHERE MASP = ?";
         SQLHalper.executeUpdate(sql, MaSP);
     }
 
-    public static ResultSet TimKiem(String TenSanPham, String HangSX) {
-        String sql = "{call spTimSanPham (?, ?)}";
-        return SQLHalper.executeQuery(sql, TenSanPham, HangSX);
+    public static ResultSet TimKiem(String TuKhoa, String LoaiSP) {
+        String sql = "{call spTimKiemSp (?, ?)}";
+        return SQLHalper.executeQuery(sql, TuKhoa, LoaiSP);
 
     }
 
@@ -92,4 +118,5 @@ public class DALSanPham {
         String sql = " Select * from SanPham where MaSanPham = ?";
         return SQLHalper.executeQuery(sql, MaSP);
     }
+    
 }

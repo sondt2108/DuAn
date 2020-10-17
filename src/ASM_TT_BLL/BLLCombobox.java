@@ -32,7 +32,7 @@ public class BLLCombobox {
 
             }
         } catch (Exception e) {
-            ThongBao.ThongBaoDangNhap("Thông Báo", "Lõi Load Dữ Liệu COmbobox");
+            ThongBao.ThongBaoDangNhap("Thông Báo", "Lỗi Load Dữ Liệu COmbobox");
         }
     }
     

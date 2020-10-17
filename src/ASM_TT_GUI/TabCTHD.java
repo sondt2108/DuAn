@@ -6,7 +6,7 @@
 package ASM_TT_GUI;
 
 import ASM_TT_BLL.BLLCTHD;
-import ASM_TT_BLL.BLLDangNhap;
+import ASM_TT_BLL.BllSanPham;
 import ASM_TT_BLL.BLLCombobox;
 import ASM_TT_BLL.BLLHoaDon;
 import ASM_TT_BLL.BLLNhanVien;
@@ -37,7 +37,7 @@ public class TabCTHD extends javax.swing.JPanel {
     public TabCTHD() {
         initComponents();
 
-        BLLDangNhap.LoadSanPhamHoaDon(tblSanPham);
+        BllSanPham.LoadSanPhamHoaDon(tblSanPham);
         //ResultSet rsKH = DALKhachHang.getALLKhachHang();
         //BLLCombobox.Load(cbbKhachHang, rsKH, false);
 
@@ -348,7 +348,7 @@ public class TabCTHD extends javax.swing.JPanel {
     private void txtTuKhoaSanPhamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTuKhoaSanPhamKeyReleased
         // TODO add your handling code here:
         String TuKhoa = "%" + txtTuKhoaSanPham.getText() + "%";
-        BLLDangNhap.TimSanPhamHoaDon(tblSanPham, TuKhoa, TuKhoa);
+       // BllSanPham.TimSanPhamHoaDon(tblSanPham, TuKhoa, TuKhoa);
     }//GEN-LAST:event_txtTuKhoaSanPhamKeyReleased
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
@@ -362,8 +362,8 @@ public class TabCTHD extends javax.swing.JPanel {
             // Lấy IDSanPham <=> Lấy sản phẩm theo ID
 
             String MaSP = tblSanPham.getValueAt(tblSanPham.getSelectedRow(), 0).toString();
-            SanPham sp = BLLDangNhap.GetSanPham(MaSP);
-            BLLHoaDon.LoadDataChiTietHoaDon(tblCHHD, sp, SoLuongMua, GhiChu);
+            //SanPham sp = BllSanPham.GetSanPham(MaSP);
+           // BLLHoaDon.LoadDataChiTietHoaDon(tblCHHD, sp, SoLuongMua, GhiChu);
 
             lblTongTien.setText(BLLHoaDon.TinhTongTien(tblCHHD));
             lblTienKhachTra.setText(BLLHoaDon.TinhTongTien(tblCHHD));

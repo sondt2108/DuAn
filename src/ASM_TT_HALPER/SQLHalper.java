@@ -19,7 +19,7 @@ public class SQLHalper {
     private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static String DBURL = "jdbc:sqlserver://localhost;databaseName=QuanLyKhoHang";
     private static String USERNAME = "sa";
-    private static String PASSWORD = "21122000";
+    private static String PASSWORD = "dat0898350852";
     public static PreparedStatement pst = null;
 
 
