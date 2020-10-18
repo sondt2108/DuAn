@@ -145,6 +145,7 @@ public class jdlHangSX extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDongyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongyActionPerformed
@@ -152,7 +153,7 @@ public class jdlHangSX extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDongyActionPerformed
 
     private void btnDongy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongy1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnDongy1ActionPerformed
 
     /**
