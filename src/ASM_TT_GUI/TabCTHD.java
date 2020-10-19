@@ -6,7 +6,7 @@
 package ASM_TT_GUI;
 
 import ASM_TT_BLL.BLLCTHD;
-import ASM_TT_BLL.BllSanPham;
+import ASM_TT_BLL.BLLSanPham;
 import ASM_TT_BLL.BLLCombobox;
 import ASM_TT_BLL.BLLHoaDon;
 import ASM_TT_BLL.BLLNhanVien;
@@ -37,7 +37,7 @@ public class TabCTHD extends javax.swing.JPanel {
     public TabCTHD() {
         initComponents();
 
-        BllSanPham.LoadSanPhamHoaDon(tblSanPham);
+        BLLSanPham.LoadSanPhamHoaDon(tblSanPham);
         //ResultSet rsKH = DALKhachHang.getALLKhachHang();
         //BLLCombobox.Load(cbbKhachHang, rsKH, false);
 

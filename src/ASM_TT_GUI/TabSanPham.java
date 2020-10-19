@@ -6,11 +6,14 @@
 package ASM_TT_GUI;
 
 import ASM_TT_BLL.BLLCombobox;
+import ASM_TT_BLL.BLLHangSX;
+import ASM_TT_BLL.BLLLoaiSP;
 import ASM_TT_DAL.DALSanPham;
-import ASM_TT_BLL.BllSanPham;
+import ASM_TT_BLL.BLLSanPham;
 import ASM_TT_BLL.BLLNhanVien;
 import ASM_TT_DAL.DALHangSx;
-import ASM_TT_DAL.DalLoaiSp;
+import ASM_TT_DAL.DALLoaiSP;
+import ASM_TT_DTO.LoaiSP;
 import ASM_TT_DTO.NhanVien;
 import ASM_TT_DTO.SanPham;
 import ASM_TT_HALPER.ChuyenDoi;
@@ -54,8 +57,8 @@ public class TabSanPham extends javax.swing.JPanel {
      */
     public TabSanPham() {
         initComponents();
-        BllSanPham.LoadSanPham(tblDanhSach);
-        ResultSet rsLSP = DalLoaiSp.GetAll();
+        BLLSanPham.LoadSanPham(tblDanhSach);
+        ResultSet rsLSP = DALLoaiSP.GetAll();
         BLLCombobox.Load(cbbLoaiSP, rsLSP, true);
         ResultSet rsHSX = DALHangSx.GetAll();
         BLLCombobox.Load(CbbHangSX, rsHSX, true);
@@ -121,6 +124,8 @@ public class TabSanPham extends javax.swing.JPanel {
 
         lblHinhAnh.setIcon(icon);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,7 +166,7 @@ public class TabSanPham extends javax.swing.JPanel {
         lblDVTinh3 = new javax.swing.JLabel();
         txtMoTa = new javax.swing.JTextField();
         btnThemLSP = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnHangSX = new javax.swing.JButton();
         cbbDonViTinh = new javax.swing.JComboBox<>();
         txtHinhAnh = new javax.swing.JTextField();
         cbbTimLoai = new javax.swing.JComboBox<>();
@@ -412,10 +417,10 @@ public class TabSanPham extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("+");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnHangSX.setText("+");
+        btnHangSX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnHangSXActionPerformed(evt);
             }
         });
 
@@ -479,7 +484,7 @@ public class TabSanPham extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(CbbHangSX, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2))
+                                        .addComponent(btnHangSX))
                                     .addComponent(txtGiaNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtGiaban)))
                             .addComponent(lblGia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -518,7 +523,7 @@ public class TabSanPham extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblHangSX, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(CbbHangSX, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnHangSX, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -624,7 +629,7 @@ public class TabSanPham extends javax.swing.JPanel {
 
         int dongDuocChon = tblDanhSach.getSelectedRow();
         String MaNV = tblDanhSach.getValueAt(dongDuocChon, 1).toString();
-        SanPham sp = BllSanPham.LaySanPhamTheoMa(MaNV);
+        SanPham sp = BLLSanPham.LaySanPhamTheoMa(MaNV);
         txtMaSP.setText(sp.getMaSanPham() + "");
         String image = (String) tblDanhSach.getValueAt(dongDuocChon, 11);
 
@@ -696,6 +701,10 @@ public class TabSanPham extends javax.swing.JPanel {
             ThongBao.ThongBaoSQL(null, "Số Lượng Không Được Bỏ Trống");
         } else if (this.txtGiaNhap.getText().length() == 0) {
             ThongBao.ThongBaoSQL(null, "Giá Không Được Bỏ Trống");
+        } else if (this.txtGiaban.getText().length() == 0) {
+            ThongBao.ThongBaoSQL(null, "Giá Bán Không Được Bỏ Trống");
+        }else if (this.txtGiaNhap.getText().length() == 0) {
+            ThongBao.ThongBaoSQL(null, "Giá Nhập Không Được Bỏ Trống");
         } else {
             int SoLuong;
 
@@ -716,8 +725,8 @@ public class TabSanPham extends javax.swing.JPanel {
             SanPham sp = new SanPham(TenSanPham, SoLuong, DonViTinh,
                     GiaNhap, GiaBan, MaLoaiSp, HangSX, NgayNhap, MoTa, HinhAnh);
             ThongBao.ThongBaoDangNhap("Thông Báo", " Được Thêm Thành Công");
-            BllSanPham.ThemSanPham(sp);
-            BllSanPham.LoadSanPham(tblDanhSach);
+            BLLSanPham.ThemSanPham(sp);
+            BLLSanPham.LoadSanPham(tblDanhSach);
         }
 
 
@@ -749,8 +758,8 @@ public class TabSanPham extends javax.swing.JPanel {
             SanPham sp = new SanPham(MaSP, TenSanPham, SoLuong, DonViTinh, GiaNhap,
                     GiaBan, MaLoaiSp, HangSX, NgayNhap, MoTa, HinhAnh);
             ThongBao.ThongBaoDangNhap("Thông Báo", " Đã Sửa Thành Công");
-            BllSanPham.UpdateSanPham(sp);
-            BllSanPham.LoadSanPham(tblDanhSach);
+            BLLSanPham.UpdateSanPham(sp);
+            BLLSanPham.LoadSanPham(tblDanhSach);
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -768,9 +777,9 @@ public class TabSanPham extends javax.swing.JPanel {
                 lstMaSP.add(MaNV);
             }
 
-            BllSanPham.Delete(lstMaSP);
+            BLLSanPham.Delete(lstMaSP);
 
-            BllSanPham.LoadSanPham(tblDanhSach);
+            BLLSanPham.LoadSanPham(tblDanhSach);
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -827,7 +836,7 @@ public class TabSanPham extends javax.swing.JPanel {
         Mycombobox myCbb = (Mycombobox)cbbTimLoai.getSelectedItem();
         MaLoaiSp = myCbb.maString();
         
-        BllSanPham.TimSanPham(tblDanhSach, TenSp, MaLoaiSp);
+        BLLSanPham.TimSanPham(tblDanhSach, TenSp, MaLoaiSp);
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
@@ -836,22 +845,26 @@ public class TabSanPham extends javax.swing.JPanel {
         Mycombobox myCbb = (Mycombobox)cbbTimLoai.getSelectedItem();
         MaLoaiSp = myCbb.maString();
         
-        BllSanPham.TimSanPham(tblDanhSach, TenSp, MaLoaiSp);
+        BLLSanPham.TimSanPham(tblDanhSach, TenSp, MaLoaiSp);
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnThemLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLSPActionPerformed
         jdlLoaiSanPham jdl = new jdlLoaiSanPham((JFrame) SwingUtilities.getWindowAncestor(this), true);
             jdl.setVisible(true);
+        String KeyWord = "";
+        BLLLoaiSP.DoDuLieuVaoCBBLoaiSP(cbbLoaiSP, KeyWord);
     }//GEN-LAST:event_btnThemLSPActionPerformed
 
     private void cbbDonViTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbDonViTinhActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbDonViTinhActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnHangSXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHangSXActionPerformed
         jdlHangSX jdl = new jdlHangSX((JFrame) SwingUtilities.getWindowAncestor(this), true);
             jdl.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+            String KeyWord = "";
+        BLLHangSX.DoDuLieuVaoCBBHangSX(CbbHangSX, KeyWord);
+    }//GEN-LAST:event_btnHangSXActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -859,6 +872,7 @@ public class TabSanPham extends javax.swing.JPanel {
     private javax.swing.JButton btnChonHinh;
     private keeptoo.KButton btnDelete;
     private keeptoo.KButton btnEdit;
+    private javax.swing.JButton btnHangSX;
     private keeptoo.KButton btnNhapMoi;
     private keeptoo.KButton btnSave;
     private javax.swing.JButton btnThemLSP;
@@ -866,7 +880,6 @@ public class TabSanPham extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbbDonViTinh;
     private javax.swing.JComboBox<String> cbbLoaiSP;
     private javax.swing.JComboBox<String> cbbTimLoai;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private keeptoo.KGradientPanel kGradientPanel1;

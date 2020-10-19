@@ -5,9 +5,15 @@
  */
 package ASM_TT_GUI;
 
+import ASM_TT_BLL.BLLNhaCungCap;
+import ASM_TT_DTO.NhaCungCap;
+import ASM_TT_HALPER.HoTroNhapSo;
+import ASM_TT_HALPER.ThongBao;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,13 +26,15 @@ public class TabNhaCungCap extends javax.swing.JPanel {
      */
     public TabNhaCungCap() {
         initComponents();
+        BLLNhaCungCap.LoadNCC(tblNhaCC);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);     
         txtDiaChi.setBackground(new Color(0, 0, 0, 0));
-        txtNhaCC.setBackground(new Color(0, 0, 0, 0));
+        txtMaNhaCC.setBackground(new Color(0, 0, 0, 0));
         txtSDT.setBackground(new Color(0, 0, 0, 0));
         txtTenNhaCC.setBackground(new Color(0, 0, 0, 0));
-        txtTimKiem.setBackground(new Color(0, 0, 0, 0));
+        txtGhiChu.setBackground(new Color(0, 0, 0, 0));
+        
     }
 
     /**
@@ -41,7 +49,7 @@ public class TabNhaCungCap extends javax.swing.JPanel {
         kGradientPanel1 = new keeptoo.KGradientPanel();
         jPanel1 = new javax.swing.JPanel();
         lblMaNV = new javax.swing.JLabel();
-        txtNhaCC = new javax.swing.JTextField();
+        txtMaNhaCC = new javax.swing.JTextField();
         lblHoTen = new javax.swing.JLabel();
         lblSoCMND = new javax.swing.JLabel();
         txtTenNhaCC = new javax.swing.JTextField();
@@ -49,7 +57,7 @@ public class TabNhaCungCap extends javax.swing.JPanel {
         txtDiaChi = new javax.swing.JTextField();
         lblDiaChi = new javax.swing.JLabel();
         lblSDT = new javax.swing.JLabel();
-        txtTimKiem = new javax.swing.JTextField();
+        txtGhiChu = new javax.swing.JTextField();
         btnSave = new keeptoo.KButton();
         btnEdit = new keeptoo.KButton();
         btnDelete = new keeptoo.KButton();
@@ -67,9 +75,9 @@ public class TabNhaCungCap extends javax.swing.JPanel {
         lblMaNV.setForeground(new java.awt.Color(0, 0, 153));
         lblMaNV.setText("Mã NCC");
 
-        txtNhaCC.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtNhaCC.setForeground(new java.awt.Color(0, 0, 153));
-        txtNhaCC.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
+        txtMaNhaCC.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtMaNhaCC.setForeground(new java.awt.Color(0, 0, 153));
+        txtMaNhaCC.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
 
         lblHoTen.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblHoTen.setForeground(new java.awt.Color(0, 0, 153));
@@ -86,6 +94,16 @@ public class TabNhaCungCap extends javax.swing.JPanel {
         txtSDT.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtSDT.setForeground(new java.awt.Color(0, 0, 153));
         txtSDT.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
+        txtSDT.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtSDTMouseMoved(evt);
+            }
+        });
+        txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSDTKeyReleased(evt);
+            }
+        });
 
         txtDiaChi.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtDiaChi.setForeground(new java.awt.Color(0, 0, 153));
@@ -99,9 +117,9 @@ public class TabNhaCungCap extends javax.swing.JPanel {
         lblSDT.setForeground(new java.awt.Color(0, 0, 153));
         lblSDT.setText("Số Điện Thoại");
 
-        txtTimKiem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtTimKiem.setForeground(new java.awt.Color(0, 0, 153));
-        txtTimKiem.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
+        txtGhiChu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtGhiChu.setForeground(new java.awt.Color(0, 0, 153));
+        txtGhiChu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
 
         btnSave.setBorder(null);
         btnSave.setText("Save");
@@ -206,7 +224,7 @@ public class TabNhaCungCap extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(lblMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(35, 35, 35)
-                            .addComponent(txtNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(70, 70, 70)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -224,7 +242,7 @@ public class TabNhaCungCap extends javax.swing.JPanel {
                             .addGap(35, 35, 35)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtTenNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTimKiem)))))
+                                .addComponent(txtGhiChu)))))
                 .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
@@ -233,7 +251,7 @@ public class TabNhaCungCap extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaNhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
@@ -245,7 +263,7 @@ public class TabNhaCungCap extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSoCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,16 +275,26 @@ public class TabNhaCungCap extends javax.swing.JPanel {
 
         tblNhaCC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mã Nhà Cung Cấp", "Tên Nhà Cung Cấp", "Số Điện Thoại", "Địa Chỉ", "Ghi Chú"
             }
         ));
+        tblNhaCC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNhaCCMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblNhaCC);
+        if (tblNhaCC.getColumnModel().getColumnCount() > 0) {
+            tblNhaCC.getColumnModel().getColumn(0).setMinWidth(70);
+            tblNhaCC.getColumnModel().getColumn(0).setMaxWidth(70);
+            tblNhaCC.getColumnModel().getColumn(1).setMinWidth(0);
+            tblNhaCC.getColumnModel().getColumn(1).setMaxWidth(0);
+            tblNhaCC.getColumnModel().getColumn(5).setMinWidth(100);
+            tblNhaCC.getColumnModel().getColumn(5).setMaxWidth(100);
+        }
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -293,34 +321,105 @@ public class TabNhaCungCap extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-    
+        String TenNCC = txtTenNhaCC.getText();
+        String SDT = txtSDT.getText();
+        String DiaChi = txtDiaChi.getText();
+        String GhiChu = txtGhiChu.getText();
+        if (this.txtTenNhaCC.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", "Mã Nhân Viên Không Được Bỏ Trống");
+        } else if (this.txtSDT.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", "Họ Và Tên Không Được Bỏ Trống");
+        } else if (this.txtDiaChi.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", "Địa Chỉ Không Được Bỏ Trống");
+        } else {
+            NhaCungCap ncc = new NhaCungCap(TenNCC, SDT, DiaChi, GhiChu);
+            BLLNhaCungCap.ThemNhaCC(ncc);
+            BLLNhaCungCap.LoadNCC(tblNhaCC);
+            ThongBao.ThongBaoSQL("Thông Báo", "Thêm thành công.");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-       
+        String MaNCC = txtMaNhaCC.getText();
+        String TenNCC = txtTenNhaCC.getText();
+        String SDT = txtSDT.getText();
+        String DiaChi = txtDiaChi.getText();
+        String GhiChu = txtGhiChu.getText();
+        if (this.txtTenNhaCC.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", "Mã Nhân Viên Không Được Bỏ Trống");
+        } else if (this.txtSDT.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", "Họ Và Tên Không Được Bỏ Trống");
+        } else if (this.txtDiaChi.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", "Địa Chỉ Không Được Bỏ Trống");
+        } else {
+            NhaCungCap ncc = new NhaCungCap(MaNCC, TenNCC, SDT, DiaChi, GhiChu);
+            BLLNhaCungCap.UpdateNhaCC(ncc);
+            BLLNhaCungCap.LoadNCC(tblNhaCC);
+            ThongBao.ThongBaoSQL("Thông Báo", "Sửa thành công.");
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-       
+       if (this.txtMaNhaCC.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", " Bạn Chưa Chọn Dòng Để Xoá !!");
+
+        } else {
+
+            int DSViTri[] = tblNhaCC.getSelectedRows();
+            List<String> lstMaSP = new ArrayList<>();
+
+            for (int i : DSViTri) {
+                String MaNV = tblNhaCC.getValueAt(i, 1).toString();
+                lstMaSP.add(MaNV);
+            }
+
+            BLLNhaCungCap.Delete(lstMaSP);
+
+            BLLNhaCungCap.LoadNCC(tblNhaCC);
+        }
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnNhapMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapMoiActionPerformed
         // TODO add your handling code here:
+        txtMaNhaCC.setText("");
+        txtTenNhaCC.setText("");
+        txtSDT.setText("");
+        txtDiaChi.setText("");
+        txtGhiChu.setText("");
       
     }//GEN-LAST:event_btnNhapMoiActionPerformed
+
+    private void tblNhaCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhaCCMouseClicked
+        int dongDuocChon = tblNhaCC.getSelectedRow();
+        String MaNCC = tblNhaCC.getValueAt(dongDuocChon, 1).toString();
+        NhaCungCap ncc = BLLNhaCungCap.LayNCCTheoMa(MaNCC);
+        txtMaNhaCC.setText(ncc.getMaNCC() + "");
+        txtTenNhaCC.setText(ncc.getTenNCC());
+        txtSDT.setText(ncc.getSDT());
+        txtDiaChi.setText(ncc.getDiaChi());
+        txtGhiChu.setText(ncc.getGhiChu());
+    }//GEN-LAST:event_tblNhaCCMouseClicked
+
+    private void txtSDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTKeyReleased
+        HoTroNhapSo.luonNhapSo(evt);
+    }//GEN-LAST:event_txtSDTKeyReleased
+
+    private void txtSDTMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSDTMouseMoved
+        txtSDT.setToolTipText("Số điện thoại có 10 số và bắt đầu bằng số 0.");
+    }//GEN-LAST:event_txtSDTMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -338,9 +437,9 @@ public class TabNhaCungCap extends javax.swing.JPanel {
     private javax.swing.JLabel lblSoCMND;
     private javax.swing.JTable tblNhaCC;
     private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtNhaCC;
+    private javax.swing.JTextField txtGhiChu;
+    private javax.swing.JTextField txtMaNhaCC;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenNhaCC;
-    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

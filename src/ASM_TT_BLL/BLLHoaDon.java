@@ -5,7 +5,7 @@
  */
 package ASM_TT_BLL;
 
-import static ASM_TT_BLL.BllSanPham.KiemTraSanPham;
+import static ASM_TT_BLL.BLLSanPham.KiemTraSanPham;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import ASM_TT_HALPER.ThongBao;

@@ -5,6 +5,10 @@
  */
 package ASM_TT_GUI;
 
+import ASM_TT_BLL.BLLLoaiSP;
+import ASM_TT_BLL.BLLSanPham;
+import ASM_TT_DTO.LoaiSP;
+import ASM_TT_HALPER.ThongBao;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -24,7 +28,7 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         txtGhiChu.setBackground(new Color(0, 0, 0, 0));
-        txtMaLoai.setBackground(new Color(0, 0, 0, 0));
+        //txtMaLoai.setBackground(new Color(0, 0, 0, 0));
         txtTenLoai.setBackground(new Color(0, 0, 0, 0));
     }
 
@@ -39,13 +43,11 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         btnDongy = new javax.swing.JButton();
-        lblHoTen = new javax.swing.JLabel();
-        txtMaLoai = new javax.swing.JTextField();
         lblHoTen1 = new javax.swing.JLabel();
         txtTenLoai = new javax.swing.JTextField();
         lblHoTen2 = new javax.swing.JLabel();
         txtGhiChu = new javax.swing.JTextField();
-        btnDongy1 = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,14 +62,6 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
                 btnDongyActionPerformed(evt);
             }
         });
-
-        lblHoTen.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblHoTen.setForeground(new java.awt.Color(0, 0, 153));
-        lblHoTen.setText("Mã Loại SP");
-
-        txtMaLoai.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtMaLoai.setForeground(new java.awt.Color(0, 0, 153));
-        txtMaLoai.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
 
         lblHoTen1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblHoTen1.setForeground(new java.awt.Color(0, 0, 153));
@@ -85,12 +79,12 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
         txtGhiChu.setForeground(new java.awt.Color(0, 0, 153));
         txtGhiChu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
 
-        btnDongy1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnDongy1.setForeground(new java.awt.Color(0, 0, 204));
-        btnDongy1.setText("Huỷ");
-        btnDongy1.addActionListener(new java.awt.event.ActionListener() {
+        btnHuy.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnHuy.setForeground(new java.awt.Color(0, 0, 204));
+        btnHuy.setText("Huỷ");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDongy1ActionPerformed(evt);
+                btnHuyActionPerformed(evt);
             }
         });
 
@@ -102,10 +96,6 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMaLoai))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblHoTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtTenLoai))
@@ -114,7 +104,7 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnDongy1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                                 .addComponent(btnDongy, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtGhiChu))))
@@ -123,11 +113,7 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMaLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHoTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -138,8 +124,8 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDongy, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDongy1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(82, 82, 82))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,12 +143,25 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDongyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongyActionPerformed
-       
+       String TenLoaiSP = txtTenLoai.getText();
+       String MoTa = txtGhiChu.getText();
+       if (this.txtTenLoai.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", "Tên Loại Sản Phẩm Không Được Bỏ Trống");
+        } else {
+           LoaiSP lsp = new LoaiSP(TenLoaiSP, MoTa);
+           BLLLoaiSP.ThemLoaiSP(lsp);
+           ThongBao.ThongBaoSQL("Thông Báo", "Thêm thành công");
+           
+        }
     }//GEN-LAST:event_btnDongyActionPerformed
 
-    private void btnDongy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongy1ActionPerformed
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        
         this.dispose();
-    }//GEN-LAST:event_btnDongy1ActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,13 +207,11 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDongy;
-    private javax.swing.JButton btnDongy1;
+    private javax.swing.JButton btnHuy;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblHoTen;
     private javax.swing.JLabel lblHoTen1;
     private javax.swing.JLabel lblHoTen2;
     private javax.swing.JTextField txtGhiChu;
-    private javax.swing.JTextField txtMaLoai;
     private javax.swing.JTextField txtTenLoai;
     // End of variables declaration//GEN-END:variables
 }

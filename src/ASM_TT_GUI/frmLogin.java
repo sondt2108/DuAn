@@ -5,7 +5,7 @@
  */
 package ASM_TT_GUI;
 
-import ASM_TT_BLL.BllSanPham;
+import ASM_TT_BLL.BLLSanPham;
 import ASM_TT_BLL.BLLNhanVien;
 import ASM_TT_DTO.NhanVien;
 import ASM_TT_HALPER.ThongBao;
@@ -339,7 +339,7 @@ public class frmLogin extends javax.swing.JFrame {
         String TenDangNhap = txtTenDangNhap.getText();
         String MatKhau = String.valueOf(txtPassWord.getPassword());
 
-        boolean kt = BllSanPham.KtraThongTin(TenDangNhap, MatKhau);
+        boolean kt = BLLSanPham.KtraThongTin(TenDangNhap, MatKhau);
         if (kt) {
             nv = BLLNhanVien.DangNhap(TenDangNhap, MatKhau);
            

@@ -5,6 +5,10 @@
  */
 package ASM_TT_GUI;
 
+import ASM_TT_BLL.BLLHangSX;
+import ASM_TT_DTO.HangSX;
+import ASM_TT_HALPER.ThongBao;
+
 /**
  *
  * @author Administrator
@@ -29,36 +33,26 @@ public class jdlHangSX extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnDongy = new javax.swing.JButton();
-        lblHoTen = new javax.swing.JLabel();
-        txtMaHangSX = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
         lblHoTen1 = new javax.swing.JLabel();
         txtTenHangSX = new javax.swing.JTextField();
         lblHoTen2 = new javax.swing.JLabel();
         txtMoTa = new javax.swing.JTextField();
-        btnDongy1 = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hãng Sản Xuất", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 13), new java.awt.Color(51, 0, 255))); // NOI18N
 
-        btnDongy.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnDongy.setForeground(new java.awt.Color(0, 0, 204));
-        btnDongy.setText("Thêm");
-        btnDongy.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnThem.setForeground(new java.awt.Color(0, 0, 204));
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDongyActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
-
-        lblHoTen.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblHoTen.setForeground(new java.awt.Color(0, 0, 153));
-        lblHoTen.setText("Mã Hãng SX");
-
-        txtMaHangSX.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtMaHangSX.setForeground(new java.awt.Color(0, 0, 153));
-        txtMaHangSX.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
 
         lblHoTen1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblHoTen1.setForeground(new java.awt.Color(0, 0, 153));
@@ -76,12 +70,12 @@ public class jdlHangSX extends javax.swing.JDialog {
         txtMoTa.setForeground(new java.awt.Color(0, 0, 153));
         txtMoTa.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(113, 117, 204)));
 
-        btnDongy1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnDongy1.setForeground(new java.awt.Color(0, 0, 204));
-        btnDongy1.setText("Huỷ");
-        btnDongy1.addActionListener(new java.awt.event.ActionListener() {
+        btnHuy.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnHuy.setForeground(new java.awt.Color(0, 0, 204));
+        btnHuy.setText("Huỷ");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDongy1ActionPerformed(evt);
+                btnHuyActionPerformed(evt);
             }
         });
 
@@ -93,10 +87,6 @@ public class jdlHangSX extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMaHangSX))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblHoTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtTenHangSX))
@@ -105,32 +95,28 @@ public class jdlHangSX extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnDongy1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                                .addComponent(btnDongy, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtMoTa))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMaHangSX, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHoTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenHangSX, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHoTen2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDongy, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDongy1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(93, 93, 93))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,13 +134,21 @@ public class jdlHangSX extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDongyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongyActionPerformed
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        String TenHangSX = txtTenHangSX.getText();
+        String GhiChu = txtMoTa.getText();
+        if (this.txtTenHangSX.getText().length() == 0) {
+            ThongBao.ThongBaoSQL("Thông Báo", "Tên Loại Sản Phẩm Không Được Bỏ Trống");
+        } else {
+            HangSX hsx = new HangSX(TenHangSX, GhiChu);
+            BLLHangSX.ThemHangSX(hsx);
+           ThongBao.ThongBaoSQL("Thông Báo", "Thêm thành công");
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
 
-    }//GEN-LAST:event_btnDongyActionPerformed
-
-    private void btnDongy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongy1ActionPerformed
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnDongy1ActionPerformed
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,13 +193,11 @@ public class jdlHangSX extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDongy;
-    private javax.swing.JButton btnDongy1;
+    private javax.swing.JButton btnHuy;
+    private javax.swing.JButton btnThem;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblHoTen;
     private javax.swing.JLabel lblHoTen1;
     private javax.swing.JLabel lblHoTen2;
-    private javax.swing.JTextField txtMaHangSX;
     private javax.swing.JTextField txtMoTa;
     private javax.swing.JTextField txtTenHangSX;
     // End of variables declaration//GEN-END:variables

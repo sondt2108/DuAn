@@ -6,7 +6,7 @@
 package ASM_TT_GUI;
 
 import ASM_TT_BLL.BLLCombobox;
-import ASM_TT_BLL.BllSanPham;
+import ASM_TT_BLL.BLLSanPham;
 import ASM_TT_BLL.BLLHoaDon;
 import ASM_TT_DAL.DALChiTietHoDon;
 import ASM_TT_BLL.BLLNhanVien;

@@ -1,7 +1,7 @@
 package ASM_TT_GUI;
 
 import ASM_TT_BLL.BLLCombobox;
-import ASM_TT_BLL.BllSanPham;
+import ASM_TT_BLL.BLLSanPham;
 import ASM_TT_BLL.BLLNhanVien;
 import ASM_TT_DAL.DALNhanVien;
 import ASM_TT_DTO.NhanVien;
