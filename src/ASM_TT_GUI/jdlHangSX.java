@@ -8,6 +8,9 @@ package ASM_TT_GUI;
 import ASM_TT_BLL.BLLHangSX;
 import ASM_TT_DTO.HangSX;
 import ASM_TT_HALPER.ThongBao;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
@@ -19,8 +22,13 @@ public class jdlHangSX extends javax.swing.JDialog {
      * Creates new form jdlHangSX
      */
     public jdlHangSX(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        txtTenHangSX.setBackground(new Color(0, 0, 0, 0));
+        //txtMaLoai.setBackground(new Color(0, 0, 0, 0));
+        txtMoTa.setBackground(new Color(0, 0, 0, 0));
     }
 
     /**

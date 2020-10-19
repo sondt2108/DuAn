@@ -21,7 +21,7 @@ import javax.swing.JComboBox;
 public class BLLLoaiSP {
      public static void ThemLoaiSP(LoaiSP lsp) {
 
-         DALLoaiSP.ThemNhaCC(lsp);
+         DALLoaiSP.ThemLoaiSP(lsp);
     }
      
     //3. Hàm đổ dữ liệu vào Combobox Loại sản phẩm

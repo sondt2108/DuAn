@@ -161,6 +161,7 @@ public class jdlLoaiSanPham extends javax.swing.JDialog {
         
         
         
+        
     }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
